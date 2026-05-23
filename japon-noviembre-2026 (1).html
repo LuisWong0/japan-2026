@@ -1,0 +1,940 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Japón · Noviembre 2026</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;700&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --ink: #1a1410;
+    --ink-light: #6b5f54;
+    --ink-faint: #b8aa9e;
+    --paper: #faf7f2;
+    --paper-warm: #f2ece2;
+    --paper-card: #ffffff;
+    --red: #c0392b;
+    --red-soft: #f9eeec;
+    --teal: #0f7c6e;
+    --teal-soft: #e8f5f3;
+    --amber: #b06d0f;
+    --amber-soft: #fdf3e3;
+    --blue: #1a5f9e;
+    --blue-soft: #eaf2fb;
+    --pink: #a0345a;
+    --pink-soft: #fcedf3;
+    --green: #3a6b1a;
+    --green-soft: #eef6e6;
+    --gray: #5a5248;
+    --gray-soft: #f1ede8;
+    --border: rgba(26,20,16,0.1);
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--paper);
+    color: var(--ink);
+    min-height: 100vh;
+  }
+
+  .hero {
+    background: var(--ink);
+    color: var(--paper);
+    padding: 64px 24px 56px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .hero::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.03'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+  }
+
+  .hero-torii {
+    font-size: 52px;
+    margin-bottom: 16px;
+    animation: float 4s ease-in-out infinite;
+  }
+
+  @keyframes float {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-6px); }
+  }
+
+  .hero h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(32px, 6vw, 52px);
+    font-weight: 700;
+    letter-spacing: -0.01em;
+    line-height: 1.1;
+    margin-bottom: 12px;
+  }
+
+  .hero h1 span { color: #e8c98a; }
+
+  .hero-sub {
+    font-size: 15px;
+    font-weight: 300;
+    color: rgba(250,247,242,0.65);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    margin-bottom: 28px;
+  }
+
+  .hero-pills {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    justify-content: center;
+  }
+
+  .hero-pill {
+    background: rgba(255,255,255,0.1);
+    border: 1px solid rgba(255,255,255,0.15);
+    border-radius: 20px;
+    padding: 5px 14px;
+    font-size: 13px;
+    color: rgba(250,247,242,0.85);
+  }
+
+  .nav {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    background: rgba(250,247,242,0.95);
+    backdrop-filter: blur(8px);
+    border-bottom: 1px solid var(--border);
+    padding: 0 24px;
+    display: flex;
+    gap: 0;
+    overflow-x: auto;
+    scrollbar-width: none;
+  }
+
+  .nav::-webkit-scrollbar { display: none; }
+
+  .nav-item {
+    padding: 14px 16px;
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--ink-light);
+    cursor: pointer;
+    border-bottom: 2px solid transparent;
+    white-space: nowrap;
+    transition: color 0.2s, border-color 0.2s;
+    text-decoration: none;
+    display: block;
+  }
+
+  .nav-item:hover { color: var(--ink); }
+  .nav-item.active { color: var(--ink); border-bottom-color: var(--ink); }
+
+  .main {
+    max-width: 780px;
+    margin: 0 auto;
+    padding: 40px 20px 80px;
+  }
+
+  .section {
+    margin-bottom: 48px;
+    animation: fadeUp 0.5s ease both;
+  }
+
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(16px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .section-header {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 16px;
+  }
+
+  .section-dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    flex-shrink: 0;
+  }
+
+  .section-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 22px;
+    font-weight: 500;
+    color: var(--ink);
+    letter-spacing: -0.01em;
+  }
+
+  .section-nights {
+    font-size: 12px;
+    font-weight: 400;
+    color: var(--ink-faint);
+    margin-left: auto;
+    white-space: nowrap;
+  }
+
+  .day-card {
+    background: var(--paper-card);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    margin-bottom: 10px;
+    overflow: hidden;
+    transition: transform 0.15s, box-shadow 0.15s;
+  }
+
+  .day-card:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 4px 20px rgba(26,20,16,0.08);
+  }
+
+  .day-inner { display: flex; align-items: stretch; }
+
+  .day-stripe { width: 4px; flex-shrink: 0; }
+
+  .day-body { padding: 16px 18px; flex: 1; }
+
+  .day-top {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    margin-bottom: 10px;
+  }
+
+  .day-date-block { min-width: 48px; text-align: center; }
+
+  .day-date-num {
+    font-family: 'Playfair Display', serif;
+    font-size: 26px;
+    font-weight: 700;
+    line-height: 1;
+    color: var(--ink);
+  }
+
+  .day-date-month {
+    font-size: 10px;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--ink-faint);
+    margin-top: 2px;
+  }
+
+  .day-date-dow {
+    font-size: 10px;
+    color: var(--ink-faint);
+    margin-top: 1px;
+  }
+
+  .day-divider-v {
+    width: 1px;
+    background: var(--border);
+    margin: 2px 0;
+    flex-shrink: 0;
+  }
+
+  .day-info { flex: 1; }
+
+  .day-title {
+    font-size: 15px;
+    font-weight: 500;
+    color: var(--ink);
+    line-height: 1.3;
+    margin-bottom: 4px;
+  }
+
+  .day-subtitle {
+    font-size: 12px;
+    color: var(--ink-light);
+    font-weight: 300;
+    margin-bottom: 2px;
+  }
+
+  .day-tags { display: flex; flex-wrap: wrap; gap: 5px; }
+
+  .tag {
+    font-size: 11px;
+    font-weight: 400;
+    padding: 3px 10px;
+    border-radius: 20px;
+    border: 1px solid var(--border);
+    color: var(--ink-light);
+    background: var(--paper-warm);
+  }
+
+  .tag.highlight { font-weight: 500; }
+
+  .day-card.travel {
+    background: var(--paper-warm);
+    border-style: dashed;
+  }
+
+  .day-card.travel .day-title { color: var(--ink-light); }
+
+  .badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    font-size: 10px;
+    font-weight: 500;
+    padding: 2px 8px;
+    border-radius: 20px;
+    margin-left: 6px;
+    vertical-align: middle;
+    letter-spacing: 0.02em;
+  }
+
+  .tips-box {
+    background: var(--amber-soft);
+    border: 1px solid rgba(176,109,15,0.2);
+    border-radius: 16px;
+    padding: 20px 22px;
+    margin-top: 40px;
+  }
+
+  .tips-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 16px;
+    font-weight: 500;
+    color: var(--amber);
+    margin-bottom: 12px;
+  }
+
+  .tips-list { list-style: none; display: flex; flex-direction: column; gap: 8px; }
+
+  .tips-list li {
+    font-size: 13px;
+    color: var(--ink-light);
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+    line-height: 1.5;
+  }
+
+  .tips-list li::before {
+    content: '→';
+    color: var(--amber);
+    font-weight: 500;
+    flex-shrink: 0;
+    margin-top: 1px;
+  }
+
+  .footer {
+    text-align: center;
+    padding: 32px 24px;
+    border-top: 1px solid var(--border);
+    font-size: 12px;
+    color: var(--ink-faint);
+  }
+
+  .dot-tokio { background: #378ADD; }
+  .dot-hakone { background: #1D9E75; }
+  .dot-osaka { background: #D85A30; }
+  .dot-kioto { background: #D4537E; }
+
+  .stripe-tokio { background: #378ADD; }
+  .stripe-hakone { background: #1D9E75; }
+  .stripe-osaka { background: #D85A30; }
+  .stripe-kioto { background: #D4537E; }
+  .stripe-gray { background: #aaa49d; }
+  .stripe-red { background: #c0392b; }
+
+  .tag-blue { background: var(--blue-soft); color: var(--blue); border-color: rgba(26,95,158,0.15); }
+  .tag-teal { background: var(--teal-soft); color: var(--teal); border-color: rgba(15,124,110,0.15); }
+  .tag-red { background: var(--red-soft); color: var(--red); border-color: rgba(192,57,43,0.15); }
+  .tag-pink { background: var(--pink-soft); color: var(--pink); border-color: rgba(160,52,90,0.15); }
+  .tag-amber { background: var(--amber-soft); color: var(--amber); border-color: rgba(176,109,15,0.15); }
+  .tag-gray { background: var(--gray-soft); color: var(--gray); border-color: rgba(90,82,72,0.15); }
+
+  .badge-blue { background: var(--blue-soft); color: var(--blue); }
+  .badge-teal { background: var(--teal-soft); color: var(--teal); }
+  .badge-gray { background: var(--gray-soft); color: var(--gray); }
+  .badge-red { background: var(--red-soft); color: var(--red); }
+
+  @media (max-width: 600px) {
+    .hero { padding: 48px 20px 40px; }
+    .day-date-num { font-size: 22px; }
+    .day-body { padding: 14px 14px; }
+    .section-nights { display: none; }
+  }
+</style>
+</head>
+<body>
+
+<div class="hero">
+  <div class="hero-torii">⛩️</div>
+  <h1>Japón <span>· Noviembre 2026</span></h1>
+  <p class="hero-sub">Itinerario de viaje · 5 personas · 17 días</p>
+  <div class="hero-pills">
+    <span class="hero-pill">📍 Tokio</span>
+    <span class="hero-pill">🏔️ Monte Fuji</span>
+    <span class="hero-pill">♨️ Hakone</span>
+    <span class="hero-pill">🏯 Osaka</span>
+    <span class="hero-pill">🌸 Kioto</span>
+    <span class="hero-pill">✈️ 13 – 29 nov</span>
+  </div>
+</div>
+
+<nav class="nav">
+  <a class="nav-item active" href="#tokio">Tokio</a>
+  <a class="nav-item" href="#fuji">Monte Fuji</a>
+  <a class="nav-item" href="#hakone">Hakone</a>
+  <a class="nav-item" href="#osaka">Osaka</a>
+  <a class="nav-item" href="#kioto">Kioto</a>
+  <a class="nav-item" href="#regreso">Regreso</a>
+</nav>
+
+<main class="main">
+
+  <!-- TOKIO -->
+  <section class="section" id="tokio">
+    <div class="section-header">
+      <div class="section-dot dot-tokio"></div>
+      <h2 class="section-title">Tokio</h2>
+      <span class="section-nights">13 – 15 nov · 3 noches</span>
+    </div>
+
+    <div class="day-card">
+      <div class="day-inner">
+        <div class="day-stripe stripe-gray"></div>
+        <div class="day-body">
+          <div class="day-top">
+            <div class="day-date-block">
+              <div class="day-date-num">13</div>
+              <div class="day-date-month">nov</div>
+              <div class="day-date-dow">vie</div>
+            </div>
+            <div class="day-divider-v"></div>
+            <div class="day-info">
+              <div class="day-title">Llegada a Tokio <span class="badge badge-gray">vuelo</span></div>
+              <div class="day-subtitle">Aeropuerto Haneda (HND) · ~17:30</div>
+            </div>
+          </div>
+          <div class="day-tags">
+            <span class="tag">✈️ Llegada HND</span>
+            <span class="tag">🚃 Traslado al hotel</span>
+            <span class="tag">🏨 Check-in</span>
+            <span class="tag">🍜 Cena libre</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="day-card">
+      <div class="day-inner">
+        <div class="day-stripe stripe-tokio"></div>
+        <div class="day-body">
+          <div class="day-top">
+            <div class="day-date-block">
+              <div class="day-date-num">14</div>
+              <div class="day-date-month">nov</div>
+              <div class="day-date-dow">sáb</div>
+            </div>
+            <div class="day-divider-v"></div>
+            <div class="day-info">
+              <div class="day-title">Tokio · Asakusa & Akihabara</div>
+              <div class="day-subtitle">Templos, mercados y cultura pop</div>
+            </div>
+          </div>
+          <div class="day-tags">
+            <span class="tag tag-blue highlight">⛩️ Senso-ji · Asakusa</span>
+            <span class="tag tag-blue highlight">🛍️ Nakamise</span>
+            <span class="tag tag-blue highlight">🌸 Ueno Park · follaje otoñal</span>
+            <span class="tag tag-blue highlight">🎮 Akihabara</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="day-card">
+      <div class="day-inner">
+        <div class="day-stripe stripe-tokio"></div>
+        <div class="day-body">
+          <div class="day-top">
+            <div class="day-date-block">
+              <div class="day-date-num">15</div>
+              <div class="day-date-month">nov</div>
+              <div class="day-date-dow">dom</div>
+            </div>
+            <div class="day-divider-v"></div>
+            <div class="day-info">
+              <div class="day-title">Tokio · Shibuya & Harajuku</div>
+              <div class="day-subtitle">Moda, cultura y el cruce más famoso del mundo</div>
+            </div>
+          </div>
+          <div class="day-tags">
+            <span class="tag tag-blue highlight">🏯 Meiji Jingu</span>
+            <span class="tag tag-blue highlight">🛍️ Takeshita Street</span>
+            <span class="tag tag-blue highlight">🚶 Cruce de Shibuya</span>
+            <span class="tag tag-blue highlight">🌆 Shibuya Sky · atardecer</span>
+            <span class="tag">🌃 Roppongi Hills de noche</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </section>
+
+  <!-- MONTE FUJI -->
+  <section class="section" id="fuji">
+    <div class="section-header">
+      <div class="section-dot" style="background:#c0392b;"></div>
+      <h2 class="section-title">Monte Fuji</h2>
+      <span class="section-nights">16 nov · full day desde Tokio</span>
+    </div>
+
+    <div class="day-card">
+      <div class="day-inner">
+        <div class="day-stripe stripe-red"></div>
+        <div class="day-body">
+          <div class="day-top">
+            <div class="day-date-block">
+              <div class="day-date-num">16</div>
+              <div class="day-date-month">nov</div>
+              <div class="day-date-dow">lun</div>
+            </div>
+            <div class="day-divider-v"></div>
+            <div class="day-info">
+              <div class="day-title">Full Day Monte Fuji <span class="badge badge-red">tour organizado</span></div>
+              <div class="day-subtitle">Salida ~7:00 AM desde Tokio · regreso ~19:00</div>
+            </div>
+          </div>
+          <div class="day-tags">
+            <span class="tag tag-red highlight">🚡 Teleférico panorámico Fuji</span>
+            <span class="tag tag-red highlight">🏔️ 5ª Estación</span>
+            <span class="tag tag-red highlight">🌊 Lago Kawaguchi</span>
+            <span class="tag tag-red highlight">💧 Oshino Hakkai</span>
+            <span class="tag tag-red highlight">🌸 Parque Oishi</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- HAKONE -->
+  <section class="section" id="hakone">
+    <div class="section-header">
+      <div class="section-dot dot-hakone"></div>
+      <h2 class="section-title">Hakone</h2>
+      <span class="section-nights">17 – 18 nov · 1 noche · ryokan</span>
+    </div>
+
+    <div class="day-card">
+      <div class="day-inner">
+        <div class="day-stripe stripe-hakone"></div>
+        <div class="day-body">
+          <div class="day-top">
+            <div class="day-date-block">
+              <div class="day-date-num">17</div>
+              <div class="day-date-month">nov</div>
+              <div class="day-date-dow">mar</div>
+            </div>
+            <div class="day-divider-v"></div>
+            <div class="day-info">
+              <div class="day-title">Hakone · Volcán, lago y onsen <span class="badge badge-teal">ryokan</span></div>
+              <div class="day-subtitle">Romancecar Shinjuku → Hakone-Yumoto · ~8:00 AM</div>
+            </div>
+          </div>
+          <div class="day-tags">
+            <span class="tag tag-teal highlight">🚡 Teleférico Ropeway</span>
+            <span class="tag tag-teal highlight">🌋 Owakudani · huevos negros</span>
+            <span class="tag tag-teal highlight">⛵ Lago Ashi · barco pirata</span>
+            <span class="tag tag-teal highlight">🖼️ Hakone Open Air Museum</span>
+            <span class="tag tag-teal highlight">♨️ Onsen en ryokan</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="day-card travel">
+      <div class="day-inner">
+        <div class="day-stripe stripe-gray"></div>
+        <div class="day-body">
+          <div class="day-top">
+            <div class="day-date-block">
+              <div class="day-date-num">18</div>
+              <div class="day-date-month">nov</div>
+              <div class="day-date-dow">mié</div>
+            </div>
+            <div class="day-divider-v"></div>
+            <div class="day-info">
+              <div class="day-title">Hakone → Osaka <span class="badge badge-gray">traslado</span></div>
+              <div class="day-subtitle">Check-out 11:00 · Shinkansen Odawara → Shin-Osaka</div>
+            </div>
+          </div>
+          <div class="day-tags">
+            <span class="tag">🧳 Envío maletas a Osaka (takuhaibin)</span>
+            <span class="tag">🚄 Shinkansen Odawara → Osaka</span>
+            <span class="tag">🏨 Check-in Osaka</span>
+            <span class="tag">🌉 Explorar Namba de noche</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- OSAKA -->
+  <section class="section" id="osaka">
+    <div class="section-header">
+      <div class="section-dot dot-osaka"></div>
+      <h2 class="section-title">Osaka</h2>
+      <span class="section-nights">18 – 22 nov · 4 noches</span>
+    </div>
+
+    <div class="day-card">
+      <div class="day-inner">
+        <div class="day-stripe stripe-osaka"></div>
+        <div class="day-body">
+          <div class="day-top">
+            <div class="day-date-block">
+              <div class="day-date-num">19</div>
+              <div class="day-date-month">nov</div>
+              <div class="day-date-dow">jue</div>
+            </div>
+            <div class="day-divider-v"></div>
+            <div class="day-info">
+              <div class="day-title">Osaka · Castillo y Dotonbori</div>
+              <div class="day-subtitle">Historia, street food y vida nocturna</div>
+            </div>
+          </div>
+          <div class="day-tags">
+            <span class="tag tag-red highlight">🏯 Castillo de Osaka</span>
+            <span class="tag tag-red highlight">🛍️ Shinsaibashi shopping</span>
+            <span class="tag tag-red highlight">🦀 Dotonbori de noche</span>
+            <span class="tag">🍢 Tour de takoyaki</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="day-card">
+      <div class="day-inner">
+        <div class="day-stripe stripe-osaka"></div>
+        <div class="day-body">
+          <div class="day-top">
+            <div class="day-date-block">
+              <div class="day-date-num">20</div>
+              <div class="day-date-month">nov</div>
+              <div class="day-date-dow">vie</div>
+            </div>
+            <div class="day-divider-v"></div>
+            <div class="day-info">
+              <div class="day-title">Universal Studios Japan</div>
+              <div class="day-subtitle">Día completo en el parque</div>
+            </div>
+          </div>
+          <div class="day-tags">
+            <span class="tag tag-red highlight">🎢 Universal Studios Japan</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="day-card">
+      <div class="day-inner">
+        <div class="day-stripe stripe-osaka"></div>
+        <div class="day-body">
+          <div class="day-top">
+            <div class="day-date-block">
+              <div class="day-date-num">21</div>
+              <div class="day-date-month">nov</div>
+              <div class="day-date-dow">sáb</div>
+            </div>
+            <div class="day-divider-v"></div>
+            <div class="day-info">
+              <div class="day-title">Osaka · Barrios y cultura local</div>
+              <div class="day-subtitle">El Osaka más auténtico</div>
+            </div>
+          </div>
+          <div class="day-tags">
+            <span class="tag tag-red highlight">🏮 Shinsekai · barrio retro</span>
+            <span class="tag tag-red highlight">🎮 Den Den Town</span>
+            <span class="tag tag-red highlight">🦁 Namba Yasaka Shrine</span>
+            <span class="tag">🛒 Nipponbashi</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="day-card travel">
+      <div class="day-inner">
+        <div class="day-stripe stripe-gray"></div>
+        <div class="day-body">
+          <div class="day-top">
+            <div class="day-date-block">
+              <div class="day-date-num">22</div>
+              <div class="day-date-month">nov</div>
+              <div class="day-date-dow">dom</div>
+            </div>
+            <div class="day-divider-v"></div>
+            <div class="day-info">
+              <div class="day-title">Osaka → Kioto <span class="badge badge-gray">traslado</span></div>
+              <div class="day-subtitle">~30 min en tren · check-in ryokan</div>
+            </div>
+          </div>
+          <div class="day-tags">
+            <span class="tag">🚃 Tren Osaka → Kioto</span>
+            <span class="tag">🏨 Check-in ryokan Kioto</span>
+            <span class="tag">🌙 Gion al atardecer · geishas</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- KIOTO -->
+  <section class="section" id="kioto">
+    <div class="section-header">
+      <div class="section-dot dot-kioto"></div>
+      <h2 class="section-title">Kioto</h2>
+      <span class="section-nights">22 – 26 nov · 3 noches · ryokan</span>
+    </div>
+
+    <div class="day-card">
+      <div class="day-inner">
+        <div class="day-stripe stripe-kioto"></div>
+        <div class="day-body">
+          <div class="day-top">
+            <div class="day-date-block">
+              <div class="day-date-num">23</div>
+              <div class="day-date-month">nov</div>
+              <div class="day-date-dow">lun</div>
+            </div>
+            <div class="day-divider-v"></div>
+            <div class="day-info">
+              <div class="day-title">Kioto · Templos y Higashiyama</div>
+              <div class="day-subtitle">Los grandes santuarios del este</div>
+            </div>
+          </div>
+          <div class="day-tags">
+            <span class="tag tag-pink highlight">⛩️ Fushimi Inari Shrine</span>
+            <span class="tag tag-pink highlight">🏯 Kiyomizu-dera</span>
+            <span class="tag tag-pink highlight">🪷 Ninenzaka y Sannenzaka</span>
+            <span class="tag tag-pink highlight">🌸 Yasaka Shrine</span>
+            <span class="tag">🌆 Maruyama Park</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="day-card">
+      <div class="day-inner">
+        <div class="day-stripe stripe-kioto"></div>
+        <div class="day-body">
+          <div class="day-top">
+            <div class="day-date-block">
+              <div class="day-date-num">24</div>
+              <div class="day-date-month">nov</div>
+              <div class="day-date-dow">mar</div>
+            </div>
+            <div class="day-divider-v"></div>
+            <div class="day-info">
+              <div class="day-title">Kioto · Arashiyama</div>
+              <div class="day-subtitle">Bambú, templos y naturaleza otoñal</div>
+            </div>
+          </div>
+          <div class="day-tags">
+            <span class="tag tag-pink highlight">🎋 Bamboo Grove</span>
+            <span class="tag tag-pink highlight">⛩️ Tenryu-ji</span>
+            <span class="tag tag-pink highlight">🌉 Puente Togetsukyo</span>
+            <span class="tag tag-pink highlight">🐒 Monkey Park Iwatayama</span>
+            <span class="tag">🍱 Nishiki Market</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="day-card">
+      <div class="day-inner">
+        <div class="day-stripe stripe-kioto"></div>
+        <div class="day-body">
+          <div class="day-top">
+            <div class="day-date-block">
+              <div class="day-date-num">25</div>
+              <div class="day-date-month">nov</div>
+              <div class="day-date-dow">mié</div>
+            </div>
+            <div class="day-divider-v"></div>
+            <div class="day-info">
+              <div class="day-title">Kioto · Castillo y norte de la ciudad</div>
+              <div class="day-subtitle">El Kioto imperial</div>
+            </div>
+          </div>
+          <div class="day-tags">
+            <span class="tag tag-pink highlight">🏯 Castillo Nijo</span>
+            <span class="tag tag-pink highlight">🏘️ Barrio Higashiyama</span>
+            <span class="tag tag-pink highlight">🌿 Maruyama Park</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="day-card travel">
+      <div class="day-inner">
+        <div class="day-stripe stripe-gray"></div>
+        <div class="day-body">
+          <div class="day-top">
+            <div class="day-date-block">
+              <div class="day-date-num">26</div>
+              <div class="day-date-month">nov</div>
+              <div class="day-date-dow">jue</div>
+            </div>
+            <div class="day-divider-v"></div>
+            <div class="day-info">
+              <div class="day-title">Kioto → Tokio <span class="badge badge-gray">traslado</span></div>
+              <div class="day-subtitle">Shinkansen ~2h15 · tarde activa en Tokio</div>
+            </div>
+          </div>
+          <div class="day-tags">
+            <span class="tag">🧳 Yamato Transport recoge maletas</span>
+            <span class="tag">🚄 Shinkansen Kioto → Tokio</span>
+            <span class="tag tag-blue highlight">🎨 TeamLab Planets</span>
+            <span class="tag tag-blue highlight">🌉 Odaiba · paseo bahía</span>
+            <span class="tag tag-blue highlight">🍻 Golden Gai de noche</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- REGRESO TOKIO -->
+  <section class="section" id="regreso">
+    <div class="section-header">
+      <div class="section-dot dot-tokio"></div>
+      <h2 class="section-title">Tokio · Regreso</h2>
+      <span class="section-nights">27 – 29 nov</span>
+    </div>
+
+    <div class="day-card">
+      <div class="day-inner">
+        <div class="day-stripe stripe-tokio"></div>
+        <div class="day-body">
+          <div class="day-top">
+            <div class="day-date-block">
+              <div class="day-date-num">27</div>
+              <div class="day-date-month">nov</div>
+              <div class="day-date-dow">vie</div>
+            </div>
+            <div class="day-divider-v"></div>
+            <div class="day-info">
+              <div class="day-title">Tokio · Shinjuku y Kabukicho</div>
+              <div class="day-subtitle">Último día completo en la ciudad</div>
+            </div>
+          </div>
+          <div class="day-tags">
+            <span class="tag tag-blue highlight">🍂 Shinjuku Gyoen · follaje otoñal</span>
+            <span class="tag tag-blue highlight">🎮 Akihabara</span>
+            <span class="tag tag-blue highlight">🦖 Kabukicho · Godzilla</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="day-card">
+      <div class="day-inner">
+        <div class="day-stripe stripe-tokio"></div>
+        <div class="day-body">
+          <div class="day-top">
+            <div class="day-date-block">
+              <div class="day-date-num">28</div>
+              <div class="day-date-month">nov</div>
+              <div class="day-date-dow">sáb</div>
+            </div>
+            <div class="day-divider-v"></div>
+            <div class="day-info">
+              <div class="day-title">Tsukiji, Ginza y preparar maletas</div>
+              <div class="day-subtitle">Vuelo al día siguiente 9:00 AM · estar en aeropuerto a las 6:00 AM</div>
+            </div>
+          </div>
+          <div class="day-tags">
+            <span class="tag tag-blue highlight">🐟 Tsukiji · mercado exterior</span>
+            <span class="tag tag-blue highlight">🛍️ Ginza shopping</span>
+            <span class="tag">🧳 Preparar maletas</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="day-card travel">
+      <div class="day-inner">
+        <div class="day-stripe stripe-gray"></div>
+        <div class="day-body">
+          <div class="day-top">
+            <div class="day-date-block">
+              <div class="day-date-num">29</div>
+              <div class="day-date-month">nov</div>
+              <div class="day-date-dow">dom</div>
+            </div>
+            <div class="day-divider-v"></div>
+            <div class="day-info">
+              <div class="day-title">Vuelo de regreso <span class="badge badge-gray">9:00 AM</span></div>
+              <div class="day-subtitle">⚠️ Salir del hotel a las 5:00–5:30 AM · aeropuerto a las 6:00 AM</div>
+            </div>
+          </div>
+          <div class="day-tags">
+            <span class="tag">🌅 Madrugada · traslado aeropuerto</span>
+            <span class="tag">✈️ Vuelo 9:00 AM</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </section>
+
+  <!-- TIPS -->
+  <div class="tips-box">
+    <div class="tips-title">⚠️ Reservar con anticipación</div>
+    <ul class="tips-list">
+      <li><strong>Tour Monte Fuji (16/11)</strong> — Reservar cuanto antes, grupos pequeños se llenan rápido en noviembre.</li>
+      <li><strong>Romancecar a Hakone (17/11)</strong> — Disponible desde el 17 de octubre. Se agota en temporada de follaje.</li>
+      <li><strong>TeamLab Planets</strong> — Comprar entradas online con semanas de anticipación.</li>
+      <li><strong>Universal Studios Japan</strong> — Reservar entrada + Express Pass para no perder tiempo en filas.</li>
+      <li><strong>Maletas (takuhaibin)</strong> — Coordinar envíos la noche anterior en cada traslado de ciudad.</li>
+      <li><strong>Vuelo 29/11 a las 9:00 AM</strong> — Salir del hotel a las 5:00–5:30 AM. Dejar todo listo la noche del 28.</li>
+    </ul>
+  </div>
+
+</main>
+
+<footer class="footer">
+  Japón · 13 – 29 noviembre 2026 &nbsp;·&nbsp; 17 días &nbsp;·&nbsp; 5 personas<br>
+  <span style="margin-top:4px; display:block;">Tokio · Monte Fuji · Hakone · Osaka · Kioto</span>
+</footer>
+
+<script>
+  const navItems = document.querySelectorAll('.nav-item');
+  const sections = document.querySelectorAll('.section');
+
+  navItems.forEach(item => {
+    item.addEventListener('click', () => {
+      navItems.forEach(n => n.classList.remove('active'));
+      item.classList.add('active');
+    });
+  });
+
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        const id = entry.target.id;
+        navItems.forEach(n => {
+          n.classList.toggle('active', n.getAttribute('href') === '#' + id);
+        });
+      }
+    });
+  }, { rootMargin: '-30% 0px -60% 0px' });
+
+  sections.forEach(s => observer.observe(s));
+
+  const cards = document.querySelectorAll('.day-card');
+  cards.forEach((card, i) => {
+    card.style.animationDelay = `${i * 0.04}s`;
+  });
+</script>
+</body>
+</html>
