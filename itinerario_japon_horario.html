@@ -1,0 +1,485 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Japón 2026 — Itinerario por hora</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Inter',sans-serif;font-size:11px;background:#f5f2ed;color:#1a1a1a}
+
+.page-header{background:#1a1410;color:#fff;padding:12px 16px;display:flex;align-items:center;gap:12px;position:sticky;top:0;z-index:200}
+.page-header h1{font-size:14px;font-weight:600;letter-spacing:.02em}
+.page-header span{font-size:10px;color:#888}
+.legend{display:flex;gap:8px;margin-left:auto;flex-wrap:wrap}
+.leg{display:flex;align-items:center;gap:4px;font-size:9px;color:#aaa}
+.leg-dot{width:9px;height:9px;border-radius:2px;flex-shrink:0}
+
+.wrap{overflow-x:auto;-webkit-overflow-scrolling:touch}
+table{border-collapse:collapse;min-width:2200px;width:100%;table-layout:fixed}
+
+/* COLUMN WIDTHS */
+col.c-time{width:52px}
+col.c-day{width:115px}
+
+/* HEADER ROWS */
+.row-dates td{background:#fff;font-weight:600;font-size:10px;padding:5px 5px;border:1px solid #ddd;text-align:center;color:#333;position:sticky;top:41px;z-index:100}
+.row-days td{background:#fafafa;font-size:9px;font-weight:500;padding:3px 5px;border:1px solid #ddd;text-align:center;color:#777;letter-spacing:.04em;position:sticky;top:68px;z-index:100}
+.row-cities td{font-weight:600;font-size:9px;padding:5px 5px;border:1px solid #ddd;text-align:center;letter-spacing:.03em;position:sticky;top:89px;z-index:100}
+
+/* TIME COL */
+.tcol{background:#fff;font-size:10px;color:#999;font-weight:500;padding:3px 5px;border:1px solid #e5e5e5;text-align:right;white-space:nowrap;position:sticky;left:0;z-index:50;min-width:52px}
+.tcol-co{background:#fff8e1;font-size:8px;font-weight:700;color:#b8860b}
+
+/* CELLS */
+td.cell{border:1px solid #e5e5e5;padding:3px 5px;vertical-align:top;font-size:10px;line-height:1.4;word-break:break-word}
+td.cell:empty{background:#fafafa}
+.act-hi{font-weight:600}
+.note{font-size:9px;color:#888;display:block;margin-top:1px}
+
+/* CITY COLORS — backgrounds */
+.c-v  {background:#f0f0f0;color:#666}
+.c-t  {background:#ebf3fb;color:#1a3a5c}
+.c-f  {background:#1a1410;color:#c9a96e}
+.c-h  {background:#f3eefb;color:#4a2d6b}
+.c-o  {background:#fdf1ee;color:#7a2a1a}
+.c-k  {background:#fdf9ee;color:#7a5c10}
+.c-t2 {background:#dff0ff;color:#1a3a5c}
+
+/* CITY HEADER COLORS */
+.h-v  {background:#ddd;color:#555}
+.h-t  {background:#1a3a5c;color:#fff}
+.h-f  {background:#1a1410;color:#c9a96e}
+.h-h  {background:#4a2d6b;color:#fff}
+.h-o  {background:#7a2a1a;color:#fff}
+.h-k  {background:#7a5c10;color:#fff}
+.h-t2 {background:#1a3a5c;color:#fff}
+
+/* SPECIAL USJ ROW */
+.h-usj{background:#1a1410;color:#c9a96e}
+.c-usj{background:#1a1410;color:#c9a96e;font-weight:600}
+
+/* SPAN helpers */
+td[rowspan]{vertical-align:middle}
+.big{font-size:11px;font-weight:600;text-align:center;padding:4px}
+</style>
+</head>
+<body>
+
+<div class="page-header">
+  <h1>🗾 Japón 2026 — Itinerario detallado por hora</h1>
+  <span>Nov 11–29 · 5 personas · 19 días</span>
+  <div class="legend">
+    <div class="leg"><div class="leg-dot" style="background:#1a3a5c"></div>Tokio</div>
+    <div class="leg"><div class="leg-dot" style="background:#1a1410"></div>Fuji/USJ</div>
+    <div class="leg"><div class="leg-dot" style="background:#4a2d6b"></div>Hakone</div>
+    <div class="leg"><div class="leg-dot" style="background:#7a2a1a"></div>Osaka</div>
+    <div class="leg"><div class="leg-dot" style="background:#7a5c10"></div>Kioto</div>
+  </div>
+</div>
+
+<div class="wrap">
+<table>
+<colgroup>
+  <col class="c-time">
+  <col class="c-day"><col class="c-day"><col class="c-day"><col class="c-day">
+  <col class="c-day"><col class="c-day"><col class="c-day"><col class="c-day">
+  <col class="c-day"><col class="c-day"><col class="c-day"><col class="c-day">
+  <col class="c-day"><col class="c-day"><col class="c-day"><col class="c-day">
+  <col class="c-day"><col class="c-day"><col class="c-day">
+</colgroup>
+
+<!-- DATES -->
+<tr class="row-dates">
+  <td>HORA</td>
+  <td>11/11 Mié</td><td>12/11 Jue</td>
+  <td>13/11 Vie</td><td>14/11 Sáb</td><td>15/11 Dom</td><td>16/11 Lun</td>
+  <td>17/11 Mar</td><td>18/11 Mié</td>
+  <td>19/11 Jue</td><td>20/11 Vie</td>
+  <td>21/11 Sáb</td><td>22/11 Dom</td><td>23/11 Lun</td><td>24/11 Mar</td>
+  <td>25/11 Mié</td><td>26/11 Jue</td><td>27/11 Vie</td><td>28/11 Sáb</td>
+  <td>29/11 Dom</td>
+</tr>
+
+<!-- CITIES -->
+<tr class="row-cities">
+  <td></td>
+  <td class="h-v">✈ IDA</td><td class="h-v">✈ IDA</td>
+  <td class="h-t">TOKIO</td><td class="h-t">TOKIO</td><td class="h-t">TOKIO</td><td class="h-f">TOKIO — MT FUJI</td>
+  <td class="h-h">TOKIO→HAKONE</td><td class="h-h">HAKONE→OSAKA</td>
+  <td class="h-usj">OSAKA — USJ 🎢</td><td class="h-o">OSAKA</td>
+  <td class="h-k">OSAKA→KIOTO</td><td class="h-k">KIOTO</td><td class="h-k">KIOTO</td><td class="h-k">KIOTO→TOKIO</td>
+  <td class="h-t2">TOKIO</td><td class="h-t2">TOKIO</td><td class="h-t2">TOKIO</td><td class="h-t2">TOKIO</td>
+  <td class="h-v">✈ VUELTA</td>
+</tr>
+
+<!-- 06:00 -->
+<tr>
+  <td class="tcol">06:00</td>
+  <td class="cell c-v"></td><td class="cell c-v"></td>
+  <td class="cell c-t"></td>
+  <td class="cell c-t"><span class="act-hi">Senso-ji</span><span class="note">Llegar antes 8am para evitar masas</span></td>
+  <td class="cell c-t"></td>
+  <td class="cell c-f"><span class="act-hi">Preparar mochila</span><span class="note">Tour sale 8:00 desde Shinjuku</span></td>
+  <td class="cell c-h"></td>
+  <td class="cell c-h"><span class="act-hi">Onsen matutino</span><span class="note">La mejor hora — vapor + montañas</span></td>
+  <td class="cell c-usj"></td>
+  <td class="cell c-o"></td>
+  <td class="cell c-k"></td>
+  <td class="cell c-k"><span class="act-hi">Fushimi Inari</span><span class="note">Salir temprano antes de las masas</span></td>
+  <td class="cell c-k"><span class="act-hi">Bamboo Grove</span><span class="note">Amanecer — luz única y silencio</span></td>
+  <td class="cell c-k"><span class="act-hi">Yamato Transport</span><span class="note">Recoge maletas en el ryokan</span></td>
+  <td class="cell c-t2"></td>
+  <td class="cell c-t2"></td>
+  <td class="cell c-t2"><span class="act-hi">Tsukiji</span><span class="note">Desayuno de mercado al amanecer</span></td>
+  <td class="cell c-t2"></td>
+  <td class="cell c-v"></td>
+</tr>
+
+<!-- 07:00 -->
+<tr>
+  <td class="tcol">07:00</td>
+  <td class="cell c-v"></td><td class="cell c-v"></td>
+  <td class="cell c-t"></td>
+  <td class="cell c-t"><span class="act-hi">Senso-ji templo</span><span class="note">Oración matutina, torii, incienso</span></td>
+  <td class="cell c-t"></td>
+  <td class="cell c-f"><span class="act-hi">Desayuno rápido</span><span class="note">Cerca del hotel antes de salir</span></td>
+  <td class="cell c-h"><span class="act-hi">Checkout Airbnb</span><span class="note">Dejar maletas en consigna Shinjuku</span></td>
+  <td class="cell c-h"><span class="act-hi">Desayuno kaiseki</span><span class="note">Incluido en el ryokan — no saltar</span></td>
+  <td class="cell c-usj"></td>
+  <td class="cell c-o"></td>
+  <td class="cell c-k"></td>
+  <td class="cell c-k"><span class="act-hi">Fushimi Inari</span><span class="note">Subir completo hasta la cima</span></td>
+  <td class="cell c-k"><span class="act-hi">Bamboo Grove</span><span class="note">Arashiyama — fotos sin gente</span></td>
+  <td class="cell c-k"><span class="act-hi">Checkout ryokan</span><span class="note">Desayuno incluido antes de salir</span></td>
+  <td class="cell c-t2"></td>
+  <td class="cell c-t2"></td>
+  <td class="cell c-t2"><span class="act-hi">Tsukiji</span><span class="note">Atún, tamagoyaki, mariscos frescos</span></td>
+  <td class="cell c-t2"></td>
+  <td class="cell c-v"></td>
+</tr>
+
+<!-- 08:00 -->
+<tr>
+  <td class="tcol">08:00</td>
+  <td class="cell c-v"></td><td class="cell c-v"></td>
+  <td class="cell c-t"></td>
+  <td class="cell c-t"><span class="act-hi">Nakamise Street</span><span class="note">Desayuno + souvenirs tradicionales</span></td>
+  <td class="cell c-t"><span class="act-hi">Meiji Jingu</span><span class="note">Santuario shinto en bosque de 70.000 árboles</span></td>
+  <td class="cell c-f"><span class="act-hi">SALIDA TOUR FUJI</span><span class="note">Punto encuentro: Shinjuku Station</span></td>
+  <td class="cell c-h"><span class="act-hi">Romancecar Shinjuku</span><span class="note">→ Hakone-Yumoto, 85 min, WiFi a bordo</span></td>
+  <td class="cell c-h"><span class="act-hi">Checkout + bus</span><span class="note">Bus desde ryokan → muelle Togendai</span></td>
+  <td class="cell c-usj"><span class="act-hi">SALIDA A USJ</span><span class="note">Metro desde Airbnb — llegar al abrir</span></td>
+  <td class="cell c-o"></td>
+  <td class="cell c-k"></td>
+  <td class="cell c-k"><span class="act-hi">Fushimi Inari</span><span class="note">Bajada tranquila con desayuno en ruta</span></td>
+  <td class="cell c-k"><span class="act-hi">Tenryu-ji Garden</span><span class="note">Jardín zen patrimonio UNESCO</span></td>
+  <td class="cell c-k"><span class="act-hi">Shinkansen</span><span class="note">Kioto → Tokio, salida ~09:00</span></td>
+  <td class="cell c-t2"></td>
+  <td class="cell c-t2"><span class="act-hi">Palacio Imperial</span><span class="note">Jardines este — entrada libre</span></td>
+  <td class="cell c-t2"><span class="act-hi">Tsukiji</span><span class="note">Paseo por el mercado exterior</span></td>
+  <td class="cell c-t2"><span class="act-hi">Compras finales</span><span class="note">Uniqlo, cosméticos, tax free</span></td>
+  <td class="cell c-v"><span class="act-hi">Traslado aeropuerto</span><span class="note">Salir 3h antes del vuelo</span></td>
+</tr>
+
+<!-- 09:00 -->
+<tr>
+  <td class="tcol">09:00</td>
+  <td class="cell c-v"></td><td class="cell c-v"></td>
+  <td class="cell c-t"></td>
+  <td class="cell c-t"><span class="act-hi">Ueno Park</span><span class="note">Follaje otoñal — koyo peak noviembre</span></td>
+  <td class="cell c-t"><span class="act-hi">Meiji Jingu</span><span class="note">Recorrido por los jardines del templo</span></td>
+  <td class="cell c-f"><span class="act-hi">Trayecto a Fuji</span><span class="note">~90 min desde Tokio en bus turístico</span></td>
+  <td class="cell c-h"><span class="act-hi">Romancecar</span><span class="note">Vistas al campo y montañas</span></td>
+  <td class="cell c-h"><span class="act-hi">Crucero Lago Ashi</span><span class="note">Togendai → Moto-Hakone, ~35 min</span></td>
+  <td class="cell c-usj"><span class="act-hi">USJ abre</span><span class="note">Entrar directo a Super Nintendo World</span></td>
+  <td class="cell c-o"></td>
+  <td class="cell c-k"><span class="act-hi">Traslado Osaka→Kioto</span><span class="note">Tren Osaka → Kyoto Station, ~30 min</span></td>
+  <td class="cell c-k"><span class="act-hi">Desayuno en Kioto</span><span class="note">Cerca del ryokan antes de salir</span></td>
+  <td class="cell c-k"><span class="act-hi">Tenryu-ji Garden</span><span class="note">Koi, bambú, vistas al monte Arashiyama</span></td>
+  <td class="cell c-k"><span class="act-hi">Shinkansen</span><span class="note">2h15 min → llegar Tokio ~11:30</span></td>
+  <td class="cell c-t2"><span class="act-hi">Shinjuku Gyoen</span><span class="note">Follaje otoñal — mejor parque de Tokio</span></td>
+  <td class="cell c-t2"><span class="act-hi">Palacio Imperial</span><span class="note">Paseo por los jardines y fosos</span></td>
+  <td class="cell c-t2"><span class="act-hi">Ginza</span><span class="note">Tiendas premium, galerías, street food</span></td>
+  <td class="cell c-t2"><span class="act-hi">Famichiken</span><span class="note">FamilyMart — el pollo frito más famoso</span></td>
+  <td class="cell c-v"><span class="act-hi">Vuelo de regreso</span><span class="note">Lima — fin del viaje</span></td>
+</tr>
+
+<!-- 10:00 -->
+<tr>
+  <td class="tcol tcol-co">10:00 CHECKOUT</td>
+  <td class="cell c-v"></td><td class="cell c-v"></td>
+  <td class="cell c-t"></td>
+  <td class="cell c-t"><span class="act-hi">Ueno Park</span><span class="note">Lago Shinobazu — barcas entre lotos</span></td>
+  <td class="cell c-t"><span class="act-hi">Takeshita Street</span><span class="note">Harajuku — moda alternativa y crepes</span></td>
+  <td class="cell c-f"><span class="act-hi">MONTE FUJI</span><span class="note">En camino a primera parada</span></td>
+  <td class="cell c-h"><span class="act-hi">Llegada Hakone-Yumoto</span><span class="note">Guardar maletas en el ryokan</span></td>
+  <td class="cell c-h"><span class="act-hi">Crucero Lago Ashi</span><span class="note">Vista al Fuji si el cielo está despejado</span></td>
+  <td class="cell c-usj"><span class="act-hi">Super Nintendo World</span><span class="note">Mario Kart + Yoshi — pulsera interactiva</span></td>
+  <td class="cell c-o"><span class="act-hi">Castillo de Osaka</span><span class="note">Llegada temprana — evitar colas</span></td>
+  <td class="cell c-k"><span class="act-hi">Llegada Kioto</span><span class="note">Guardar maletas en recepción del ryokan</span></td>
+  <td class="cell c-k"><span class="act-hi">Kiyomizu-dera</span><span class="note">Terraza con vistas — hojas rojas otoño</span></td>
+  <td class="cell c-k"><span class="act-hi">Puente Togetsukyo</span><span class="note">Foto icónica con Monte Arashiyama</span></td>
+  <td class="cell c-k"><span class="act-hi">Shinkansen</span><span class="note">En tren hacia Tokio</span></td>
+  <td class="cell c-t2"><span class="act-hi">Shinjuku Gyoen</span><span class="note">Entrada ¥500 — tres estilos de jardín</span></td>
+  <td class="cell c-t2"><span class="act-hi">Almuerzo Ginza</span><span class="note">Zona con excelentes opciones a precio medio</span></td>
+  <td class="cell c-t2"><span class="act-hi">Ginza</span><span class="note">Itoya (papelería icónica), Ginza Six</span></td>
+  <td class="cell c-t2"><span class="act-hi">Souvenirs pendientes</span><span class="note">Don Quijote — último día de compras</span></td>
+  <td class="cell c-v"></td>
+</tr>
+
+<!-- 11:00 -->
+<tr>
+  <td class="tcol">11:00</td>
+  <td class="cell c-v"></td><td class="cell c-v"></td>
+  <td class="cell c-t"></td>
+  <td class="cell c-t"><span class="act-hi">Ueno Park</span><span class="note">Museo Nacional, zoo — opcional</span></td>
+  <td class="cell c-t"><span class="act-hi">Takeshita Street</span><span class="note">Compras, fotos, crepes de colores</span></td>
+  <td class="cell c-f"><span class="act-hi">Arakurayama Sengen Park</span><span class="note">Pagoda + vista al Fuji — foto icónica</span></td>
+  <td class="cell c-h"><span class="act-hi">Hakone Open-Air Museum</span><span class="note">Esculturas entre montañas — 3h</span></td>
+  <td class="cell c-h"><span class="act-hi">Teleférico Komagatake</span><span class="note">Subida a 1,327m — vista 360°</span></td>
+  <td class="cell c-usj"><span class="act-hi">Super Nintendo World</span><span class="note">Donkey Kong Country — nueva zona 2024</span></td>
+  <td class="cell c-o"><span class="act-hi">Castillo de Osaka</span><span class="note">Museo interior 8 pisos — historia feudal</span></td>
+  <td class="cell c-k"><span class="act-hi">Fushimi Inari Taisha</span><span class="note">Miles de torii naranja — subida 2-3h</span></td>
+  <td class="cell c-k"><span class="act-hi">Kiyomizu-dera</span><span class="note">Templo del agua — sin clavos de metal</span></td>
+  <td class="cell c-k"><span class="act-hi">Monkey Park Iwatayama</span><span class="note">Macacos japoneses con vista a Kioto</span></td>
+  <td class="cell c-k"><span class="act-hi">Llegada Tokio</span><span class="note">Check-in o guardar maletas en hotel</span></td>
+  <td class="cell c-t2"><span class="act-hi">Shinjuku Gyoen</span><span class="note">Zona francesa, inglesa y japonesa</span></td>
+  <td class="cell c-t2"><span class="act-hi">Torre de Tokio</span><span class="note">Vistas de día — cielo despejado noviembre</span></td>
+  <td class="cell c-t2"><span class="act-hi">Ginza shopping</span><span class="note">Uniqlo Ginza (12 pisos), Dover Street</span></td>
+  <td class="cell c-t2"><span class="act-hi">Compras</span><span class="note">Guardar tickets tax-free para aeropuerto</span></td>
+  <td class="cell c-v"></td>
+</tr>
+
+<!-- 12:00 -->
+<tr>
+  <td class="tcol">12:00</td>
+  <td class="cell c-v"></td><td class="cell c-v"></td>
+  <td class="cell c-t"></td>
+  <td class="cell c-t"><span class="act-hi">Almuerzo en Ueno</span><span class="note">Ramen Ippudo o izakaya del parque</span></td>
+  <td class="cell c-t"><span class="act-hi">Almuerzo Harajuku</span><span class="note">Gyukatsu Motomura o Afuri ramen</span></td>
+  <td class="cell c-f"><span class="act-hi">Lago Kawaguchi</span><span class="note">Oishi Park — flores + vista al Fuji</span></td>
+  <td class="cell c-h"><span class="act-hi">Open-Air Museum</span><span class="note">Piscina termal de pies (gratuita)</span></td>
+  <td class="cell c-h"><span class="act-hi">Almuerzo Moto-Hakone</span><span class="note">Junto al lago — tofu local o soba</span></td>
+  <td class="cell c-usj"><span class="act-hi">Almuerzo en USJ</span><span class="note">Three Broomsticks o Minion Café</span></td>
+  <td class="cell c-o"><span class="act-hi">Almuerzo Shinsaibashi</span><span class="note">Kushikatsu Daruma — especialidad Osaka</span></td>
+  <td class="cell c-k"><span class="act-hi">Almuerzo en ruta</span><span class="note">Tofu kaiseki cerca de Fushimi</span></td>
+  <td class="cell c-k"><span class="act-hi">Almuerzo Higashiyama</span><span class="note">Kinosuke — yudofu y kaiseki simple</span></td>
+  <td class="cell c-k"><span class="act-hi">Almuerzo Arashiyama</span><span class="note">Soba con vista al río Oi</span></td>
+  <td class="cell c-k"><span class="act-hi">TeamLab Planets</span><span class="note">Arte digital inmersivo — reservar</span></td>
+  <td class="cell c-t2"><span class="act-hi">Almuerzo Shinjuku</span><span class="note">Omoide Yokocho — yakitori en callejón</span></td>
+  <td class="cell c-t2"><span class="act-hi">Torre de Tokio</span><span class="note">Lookout deck a 150m</span></td>
+  <td class="cell c-t2"><span class="act-hi">Almuerzo Ginza</span><span class="note">Sushi Saito o Ten-Ichi tempura</span></td>
+  <td class="cell c-t2"><span class="act-hi">Almuerzo especial</span><span class="note">Última comida importante en Tokio</span></td>
+  <td class="cell c-v"></td>
+</tr>
+
+<!-- 13:00 -->
+<tr>
+  <td class="tcol">13:00</td>
+  <td class="cell c-v"></td><td class="cell c-v"></td>
+  <td class="cell c-t"></td>
+  <td class="cell c-t"><span class="act-hi">Akihabara</span><span class="note">Electrónica, figuras, tiendas anime</span></td>
+  <td class="cell c-t"><span class="act-hi">Cruce de Shibuya</span><span class="note">El cruce peatonal más concurrido del mundo</span></td>
+  <td class="cell c-f"><span class="act-hi">Oshino Hakkai</span><span class="note">8 manantiales sagrados del Fuji</span></td>
+  <td class="cell c-h"><span class="act-hi">Almuerzo en Gora</span><span class="note">Ramen o soba cerca del museo</span></td>
+  <td class="cell c-h"><span class="act-hi">Hakone Jinja</span><span class="note">Santuario — torii rojo sobre el lago</span></td>
+  <td class="cell c-usj"><span class="act-hi">Harry Potter World</span><span class="note">Hogsmeade, Hogwarts Express, Butterbeer</span></td>
+  <td class="cell c-o"><span class="act-hi">Shinsaibashi</span><span class="note">Shopping arcade techada más larga de Japón</span></td>
+  <td class="cell c-k"><span class="act-hi">Fushimi Inari</span><span class="note">Recorrido completo hasta cima — 233m</span></td>
+  <td class="cell c-k"><span class="act-hi">Ninenzaka</span><span class="note">Calle empedrada del s.XIX — souvenir shops</span></td>
+  <td class="cell c-k"><span class="act-hi">Castillo Nijo</span><span class="note">Pisos "ruiseñor" — avisan de intrusos</span></td>
+  <td class="cell c-k"><span class="act-hi">TeamLab Planets</span><span class="note">Tobita, Digital Art Museum Odaiba</span></td>
+  <td class="cell c-t2"><span class="act-hi">Akihabara</span><span class="note">Jump Shop, One Piece Store, figuras</span></td>
+  <td class="cell c-t2"><span class="act-hi">Odaiba</span><span class="note">Bus desde Torre de Tokio → Odaiba</span></td>
+  <td class="cell c-t2"><span class="act-hi">Parco Shibuya</span><span class="note">JoJo World (6F), Jump Shop, JINS</span></td>
+  <td class="cell c-t2"><span class="act-hi">Paseo libre</span><span class="note">Barrio favorito — último recorrido</span></td>
+  <td class="cell c-v"></td>
+</tr>
+
+<!-- 14:00 -->
+<tr>
+  <td class="tcol">14:00</td>
+  <td class="cell c-v"></td><td class="cell c-v"></td>
+  <td class="cell c-t"></td>
+  <td class="cell c-t"><span class="act-hi">Akihabara</span><span class="note">Yodobashi Camera, Mandarake, Animate</span></td>
+  <td class="cell c-t"><span class="act-hi">Shibuya — zona</span><span class="note">Hachiko, Scramble Square, calles laterales</span></td>
+  <td class="cell c-f"><span class="act-hi">Shimoyoshida St.</span><span class="note">Foto en Lawson con el Fuji de fondo</span></td>
+  <td class="cell c-h"><span class="act-hi">Check-in Ryokan Okada</span><span class="note">Ponerse yukata — experiencia tradicional</span></td>
+  <td class="cell c-h"><span class="act-hi">Hakone Jinja</span><span class="note">Bosque de cedros milenarios</span></td>
+  <td class="cell c-usj"><span class="act-hi">Harry Potter World</span><span class="note">Forbidden Journey, Hippogriff</span></td>
+  <td class="cell c-o"><span class="act-hi">Shinsaibashi shopping</span><span class="note">Zara, H&M, marcas japonesas locales</span></td>
+  <td class="cell c-k"><span class="act-hi">Barrio Higashiyama</span><span class="note">Calles medievales preservadas</span></td>
+  <td class="cell c-k"><span class="act-hi">Sannenzaka</span><span class="note">Escaleras históricas — matcha shops</span></td>
+  <td class="cell c-k"><span class="act-hi">Castillo Nijo</span><span class="note">Jardines Ninomaru — cipreses y pinos</span></td>
+  <td class="cell c-k"><span class="act-hi">TeamLab Planets</span><span class="note">Descalzarse — caminar sobre agua digital</span></td>
+  <td class="cell c-t2"><span class="act-hi">Akihabara</span><span class="note">Otachu, Super Potato, arcades retro</span></td>
+  <td class="cell c-t2"><span class="act-hi">Gundam — Odaiba</span><span class="note">Foto con el Gundam RX-78 gigante 🤖</span></td>
+  <td class="cell c-t2"><span class="act-hi">Don Quijote</span><span class="note">Cosméticos, snacks, ropa, gadgets</span></td>
+  <td class="cell c-t2"><span class="act-hi">Cena de despedida</span><span class="note">Reservar restaurante especial — omakase</span></td>
+  <td class="cell c-v"></td>
+</tr>
+
+<!-- 15:00 -->
+<tr>
+  <td class="tcol">15:00</td>
+  <td class="cell c-v"></td><td class="cell c-v"></td>
+  <td class="cell c-t"></td>
+  <td class="cell c-t"><span class="act-hi">Akihabara</span><span class="note">Compra figuras, manga, cartas coleccionables</span></td>
+  <td class="cell c-t"><span class="act-hi">Shibuya Sky</span><span class="note">Reservar entrada — agota rápido</span></td>
+  <td class="cell c-f"><span class="act-hi">Kawaguchiko Natural Living</span><span class="note">Centro artesanías y matcha del Fuji</span></td>
+  <td class="cell c-h"><span class="act-hi">Onsen privado</span><span class="note">Baño termal — agua mineral volcánica</span></td>
+  <td class="cell c-h"><span class="act-hi">Bus → Hakone-Yumoto</span><span class="note">Recoger maletas · ir a estación</span></td>
+  <td class="cell c-usj"><span class="act-hi">Atracciones tarde</span><span class="note">Jurassic Park, Minion Park, shows</span></td>
+  <td class="cell c-o"><span class="act-hi">Shinsaibashi</span><span class="note">Americamura — street fashion alternativo</span></td>
+  <td class="cell c-k"><span class="act-hi">Higashiyama</span><span class="note">Santuario Chion-in — campana enorme</span></td>
+  <td class="cell c-k"><span class="act-hi">Yasaka Shrine</span><span class="note">Entrada desde Higashiyama — lanterns</span></td>
+  <td class="cell c-k"><span class="act-hi">Kinkaku-ji</span><span class="note">Pabellón Dorado — obligatorio al caer tarde</span></td>
+  <td class="cell c-k"><span class="act-hi">TeamLab Planets</span><span class="note">Sala de las flores + espejos infinitos</span></td>
+  <td class="cell c-t2"><span class="act-hi">Akihabara</span><span class="note">Maid cafés si quieren la experiencia</span></td>
+  <td class="cell c-t2"><span class="act-hi">Odaiba</span><span class="note">DiverCity Tokyo Plaza — food court</span></td>
+  <td class="cell c-t2"><span class="act-hi">Parco / Shibuya</span><span class="note">Centro comercial 8 pisos — marcas mix</span></td>
+  <td class="cell c-t2"><span class="act-hi">Cena de despedida</span><span class="note">Yakitori, shabu-shabu o wagyu final</span></td>
+  <td class="cell c-v"></td>
+</tr>
+
+<!-- 16:00 -->
+<tr>
+  <td class="tcol">16:00</td>
+  <td class="cell c-v"></td><td class="cell c-v"></td>
+  <td class="cell c-t"></td>
+  <td class="cell c-t"><span class="act-hi">Akihabara</span><span class="note">Arcades — UFO catchers y rhythm games</span></td>
+  <td class="cell c-t"><span class="act-hi">Shibuya Sky</span><span class="note">Plataforma al aire libre — atardecer panorámico</span></td>
+  <td class="cell c-f"><span class="act-hi">Regreso a Tokio</span><span class="note">Bus desde área del Fuji → Shinjuku</span></td>
+  <td class="cell c-h"><span class="act-hi">Onsen comunal</span><span class="note">Baño mixto de vista al monte</span></td>
+  <td class="cell c-h"><span class="act-hi">Romancecar</span><span class="note">Hakone-Yumoto → Odawara, 15 min</span></td>
+  <td class="cell c-usj"><span class="act-hi">Atracciones tarde</span><span class="note">Flying Dinosaur — montaña rusa más extrema</span></td>
+  <td class="cell c-o"><span class="act-hi">Shinsaibashi</span><span class="note">Takashimaya, Loft, Bic Camera</span></td>
+  <td class="cell c-k"><span class="act-hi">Higashiyama atardecer</span><span class="note">Las calles se iluminan con linternas</span></td>
+  <td class="cell c-k"><span class="act-hi">Yasaka Shrine</span><span class="note">Maruyama Park — cerezos sin hojas en nov</span></td>
+  <td class="cell c-k"><span class="act-hi">Kinkaku-ji</span><span class="note">Reflejo dorado en el lago al atardecer</span></td>
+  <td class="cell c-k"><span class="act-hi">Odaiba</span><span class="note">Paseo por la bahía de Tokio al atardecer</span></td>
+  <td class="cell c-t2"><span class="act-hi">Omoide Yokocho</span><span class="note">Callejón de los recuerdos — yakitori</span></td>
+  <td class="cell c-t2"><span class="act-hi">Odaiba paseo</span><span class="note">Vista al Rainbow Bridge y skyline</span></td>
+  <td class="cell c-t2"><span class="act-hi">Shibuya Sky</span><span class="note">Atardecer panorámico — reservar</span></td>
+  <td class="cell c-t2"><span class="act-hi">Preparar maletas</span><span class="note">Empacar todo — vuelo mañana</span></td>
+  <td class="cell c-v"></td>
+</tr>
+
+<!-- 17:00 -->
+<tr>
+  <td class="tcol">17:00</td>
+  <td class="cell c-v"></td><td class="cell c-v"></td>
+  <td class="cell c-t"><span class="act-hi">Llegada HND ✈</span><span class="note">Aeropuerto Haneda</span></td>
+  <td class="cell c-t"><span class="act-hi">Akihabara noche</span><span class="note">El barrio se transforma con neones</span></td>
+  <td class="cell c-t"><span class="act-hi">Shibuya Sky</span><span class="note">Hora dorada → atardecer → luces nocturnas</span></td>
+  <td class="cell c-f"><span class="act-hi">Regreso a Tokio</span><span class="note">Llegada ~19:00 a Shinjuku</span></td>
+  <td class="cell c-h"><span class="act-hi">Cena kaiseki</span><span class="note">En el ryokan — menú degustación 8 platos</span></td>
+  <td class="cell c-h"><span class="act-hi">Shinkansen</span><span class="note">Odawara → Shin-Osaka, ~2h20</span></td>
+  <td class="cell c-usj"><span class="act-hi">Shows nocturnos</span><span class="note">WaterWorld o espectáculo de cierre</span></td>
+  <td class="cell c-o"><span class="act-hi">Dotonbori</span><span class="note">El canal se llena de vida al atardecer</span></td>
+  <td class="cell c-k"><span class="act-hi">Gion</span><span class="note">Zona de geishas — Hanamikoji St.</span></td>
+  <td class="cell c-k"><span class="act-hi">Nishiki Market</span><span class="note">El "Cocina de Kioto" — 400 tiendas</span></td>
+  <td class="cell c-k"><span class="act-hi">Odaiba</span><span class="note">Rainbow Bridge iluminado al anochecer</span></td>
+  <td class="cell c-t2"><span class="act-hi">Kabukicho</span><span class="note">Godzilla en la fachada del hotel</span></td>
+  <td class="cell c-t2"><span class="act-hi">Odaiba</span><span class="note">Aqua City, Venus Fort, cena en la bahía</span></td>
+  <td class="cell c-t2"><span class="act-hi">Shibuya</span><span class="note">Scramble de noche — luces espectaculares</span></td>
+  <td class="cell c-t2"><span class="act-hi">Preparar maletas</span><span class="note">Yamato Transport si quieren mandar</span></td>
+  <td class="cell c-v"></td>
+</tr>
+
+<!-- 18:00 -->
+<tr>
+  <td class="tcol">18:00</td>
+  <td class="cell c-v"></td><td class="cell c-v"></td>
+  <td class="cell c-t"><span class="act-hi">Traslado al hotel</span><span class="note">Monorail HND → Shinjuku o Shibuya</span></td>
+  <td class="cell c-t"><span class="act-hi">Cena en Akihabara</span><span class="note">Maid café o ramen local</span></td>
+  <td class="cell c-t"><span class="act-hi">Roppongi Hills</span><span class="note">Museo Mori, terraza nocturna, cena</span></td>
+  <td class="cell c-f"><span class="act-hi">Llegada a Tokio</span><span class="note">Recoger maletas de consigna</span></td>
+  <td class="cell c-h"><span class="act-hi">Cena kaiseki</span><span class="note">Cena incluida en el ryokan — disfrutar</span></td>
+  <td class="cell c-h"><span class="act-hi">Shinkansen</span><span class="note">En tren hacia Osaka</span></td>
+  <td class="cell c-usj"><span class="act-hi">Cena en USJ</span><span class="note">Antes de salir — Minion Park Food Court</span></td>
+  <td class="cell c-o"><span class="act-hi">Dotonbori</span><span class="note">Neon reflections en el canal — foto obligada</span></td>
+  <td class="cell c-k"><span class="act-hi">Gion</span><span class="note">Posibilidad de ver geisha/maiko caminando</span></td>
+  <td class="cell c-k"><span class="act-hi">Nishiki Market</span><span class="note">Probar todo — dango, tamagoyaki, sake</span></td>
+  <td class="cell c-k"><span class="act-hi">Golden Gai</span><span class="note">200 bares diminutos en Shinjuku</span></td>
+  <td class="cell c-t2"><span class="act-hi">Kabukicho</span><span class="note">Robot Restaurant área, entretenimiento</span></td>
+  <td class="cell c-t2"><span class="act-hi">Cena Odaiba</span><span class="note">Joypolis o restaurantes vista al mar</span></td>
+  <td class="cell c-t2"><span class="act-hi">Kabukicho</span><span class="note">Shinjuku de noche — zona de neones</span></td>
+  <td class="cell c-t2"><span class="act-hi">Última cena</span><span class="note">Despedida de Japón — elegir bien</span></td>
+  <td class="cell c-v"></td>
+</tr>
+
+<!-- 19:00 -->
+<tr>
+  <td class="tcol">19:00</td>
+  <td class="cell c-v"><span class="act-hi">✈ VUELO IDA</span><span class="note">Lima → Japón</span></td>
+  <td class="cell c-v"><span class="act-hi">✈ EN TRÁNSITO</span></td>
+  <td class="cell c-t"><span class="act-hi">Check-in hotel</span><span class="note">Dejar maletas, refrescarse</span></td>
+  <td class="cell c-t"><span class="act-hi">Cena Ueno / Akihabara</span><span class="note">Tonkatsu Maisen o conveyor sushi</span></td>
+  <td class="cell c-t"><span class="act-hi">Roppongi Hills</span><span class="note">Torre Mori — vistas nocturnas a 238m</span></td>
+  <td class="cell c-f"><span class="act-hi">Llegada Tokio ~19:00</span><span class="note">Cena y descanso — día intenso</span></td>
+  <td class="cell c-h"><span class="act-hi">Cena kaiseki</span><span class="note">Chawanmushi, sashimi, tempura, miso</span></td>
+  <td class="cell c-h"><span class="act-hi">Llegada Osaka</span><span class="note">Check-in Airbnb + explorar Namba</span></td>
+  <td class="cell c-usj"><span class="act-hi">Regreso al Airbnb</span><span class="note">Cena wagyu — mejor carne de Japón</span></td>
+  <td class="cell c-o"><span class="act-hi">Tour takoyaki</span><span class="note">Pulpo frito — plato emblema de Osaka</span></td>
+  <td class="cell c-k"><span class="act-hi">Gion al atardecer</span><span class="note">La hora mágica de las geishas</span></td>
+  <td class="cell c-k"><span class="act-hi">Nishiki Market cierre</span><span class="note">Últimas compras gastronómicas</span></td>
+  <td class="cell c-k"><span class="act-hi">Golden Gai</span><span class="note">Elegir un bar — experiencia única</span></td>
+  <td class="cell c-t2"><span class="act-hi">Kabukicho</span><span class="note">Foto con Godzilla en el hotel Gracery</span></td>
+  <td class="cell c-t2"><span class="act-hi">Cena</span><span class="note">Yakiniku o shabu-shabu en Shinjuku</span></td>
+  <td class="cell c-t2"><span class="act-hi">Kabukicho</span><span class="note">El barrio más vivo de Tokio de noche</span></td>
+  <td class="cell c-t2"><span class="act-hi">Última noche</span><span class="note">Dormir temprano — vuelo mañana</span></td>
+  <td class="cell c-v"></td>
+</tr>
+
+<!-- 20:00 -->
+<tr>
+  <td class="tcol">20:00</td>
+  <td class="cell c-v"></td><td class="cell c-v"></td>
+  <td class="cell c-t"><span class="act-hi">Cena bienvenida</span><span class="note">Primer ramen o izakaya en Japón</span></td>
+  <td class="cell c-t"><span class="act-hi">Descanso</span><span class="note">Primer día intenso — vuelta al hotel</span></td>
+  <td class="cell c-t"><span class="act-hi">Roppongi</span><span class="note">Bares y clubs internacionales</span></td>
+  <td class="cell c-f"><span class="act-hi">Descanso</span><span class="note">Subir y bajar el Fuji en un día — a dormir</span></td>
+  <td class="cell c-h"><span class="act-hi">Descanso en ryokan</span><span class="note">Segunda sesión de onsen nocturno</span></td>
+  <td class="cell c-h"><span class="act-hi">Llegada Osaka</span><span class="note">Explorar Dotonbori de noche</span></td>
+  <td class="cell c-usj"><span class="act-hi">Descanso</span><span class="note">Día completo caminando — a descansar</span></td>
+  <td class="cell c-o"><span class="act-hi">Dotonbori de noche</span><span class="note">Foto en el canal con los neones — icónica</span></td>
+  <td class="cell c-k"><span class="act-hi">Descanso</span><span class="note">Check-in ryokan si no se hizo antes</span></td>
+  <td class="cell c-k"><span class="act-hi">Descanso</span><span class="note">Ryokan de Kioto — onsen nocturno</span></td>
+  <td class="cell c-k"><span class="act-hi">Golden Gai</span><span class="note">Ultimo trago antes de dormir</span></td>
+  <td class="cell c-t2"><span class="act-hi">Descanso</span><span class="note">Hotel Tokio II</span></td>
+  <td class="cell c-t2"><span class="act-hi">Descanso</span></td>
+  <td class="cell c-t2"><span class="act-hi">Kabukicho</span><span class="note">Noche en Shinjuku — bares y neones</span></td>
+  <td class="cell c-t2"><span class="act-hi">Descanso</span><span class="note">Madrugar para aeropuerto mañana</span></td>
+  <td class="cell c-v"></td>
+</tr>
+
+<!-- 21:00 -->
+<tr>
+  <td class="tcol">21:00</td>
+  <td class="cell c-v"></td><td class="cell c-v"></td>
+  <td class="cell c-t"></td>
+  <td class="cell c-t"></td>
+  <td class="cell c-t"><span class="act-hi">Roppongi Hills</span><span class="note">Vistas nocturnas, cócteles, ambiente</span></td>
+  <td class="cell c-f"></td>
+  <td class="cell c-h"><span class="act-hi">Onsen nocturno</span><span class="note">Estrenar cielos de Hakone de noche</span></td>
+  <td class="cell c-h"><span class="act-hi">Namba de noche</span><span class="note">Shinsaibashi, Dotonbori, Kuromon</span></td>
+  <td class="cell c-usj"></td>
+  <td class="cell c-o"><span class="act-hi">Dotonbori</span><span class="note">Glico man, cangrejo, neon — foto grupal</span></td>
+  <td class="cell c-k"></td>
+  <td class="cell c-k"></td>
+  <td class="cell c-k"></td>
+  <td class="cell c-k"></td>
+  <td class="cell c-t2"></td>
+  <td class="cell c-t2"></td>
+  <td class="cell c-t2"><span class="act-hi">Kabukicho</span><span class="note">La noche más animada del viaje</span></td>
+  <td class="cell c-t2"></td>
+  <td class="cell c-v"></td>
+</tr>
+
+</table>
+</div>
+</body>
+</html>
